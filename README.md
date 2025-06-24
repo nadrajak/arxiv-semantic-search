@@ -2,8 +2,12 @@
 
 Semantic search on arXiv paper abstracts from the [arXiv dataset](https://arxiv.org/help/bulk_data), using **fine-tuned transformer embeddings**. Built with the [SentenceTransformers](https://www.sbert.net/) library and the [PyTorch](https://pytorch.org/) deep learning framework.
 
+[![Open in Streamlit](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://streamlit.io/)
+
+
 ## Demo
 ...
+
 
 ## Building
 ### Prerequisites
