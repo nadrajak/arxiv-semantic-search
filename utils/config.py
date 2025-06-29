@@ -1,5 +1,9 @@
 RANDOM_SEED = 123
+
 FT_NROWS = 15_000
+FT_TRAIN_TRIPLETS = 10_000
+FT_EVAL_TRIPLETS = 1_000
+FT_TEST_TRIPLETS = 1_000
 
 
 import matplotlib.pyplot as plt
