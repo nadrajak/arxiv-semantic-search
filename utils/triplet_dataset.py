@@ -88,21 +88,3 @@ def create_triplet_evaluator_for_trainer(dataset, name="triplet_eval"):
     )
 
     return evaluator
-
-
-# def create_triplet_evaluator_for_trainer(data, n=None, col="abstract", name="triplet_eval"):
-#     """Create TripletEvaluator in the format expected by SentenceTransformerTrainer."""
-    
-#     if n is None:
-#         n = min(1000, len(data))  # Reasonable default for evaluation
-    
-#     anchors, positives, negatives = generate_triplets(data, n, col)
-    
-#     evaluator = TripletEvaluator(
-#         anchors=anchors,
-#         positives=positives,
-#         negatives=negatives,
-#         name=name
-#     )
-
-#     return evaluator
