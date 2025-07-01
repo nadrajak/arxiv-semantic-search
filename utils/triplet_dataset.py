@@ -53,7 +53,6 @@ def generate_triplets(data, n, col="abstract"):
     return anchors, positives, negatives
 
 
-# def create_dataset_for_trainer(anchors, positives, negatives):
 def create_dataset_for_trainer(data, n=None, col="abstract"):
     """Create a HuggingFace Dataset in the format expected by SentenceTransformerTrainer"""
 

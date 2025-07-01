@@ -15,6 +15,7 @@ def setup_plot_style():
     # Custom modifications
     plt.rcParams.update({
         'font.size': 12,
+        'figure.titlesize': 18,
         'figure.facecolor': '#ffffff',
         'axes.facecolor': '#f5f5f5',
         'axes.titlepad': 12,
