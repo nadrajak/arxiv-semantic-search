@@ -65,6 +65,24 @@ st.markdown("""
 
 # --- Helpers (arXiv) ---
 
+def fix_arxiv_id(id_value):
+    """Fixes the broken IDs introduced by the arXiv dataset"""
+    # Ensure it's a string
+    if not isinstance(id_value, str):
+        id_value = str(id_value)
+
+    # Old arXiv IDs (like "math.GT/0309136") shouldn’t be split
+    if "." not in id_value or "/" in id_value:
+        return id_value  
+
+    try:
+        id_a, id_b = id_value.split(".")
+        return f"{id_a.rjust(4, '0')}.{id_b.ljust(4, '0')}"
+    except ValueError:
+        # Fallback: just return as-is if something unexpected happens
+        return id_value
+
+
 def id_to_url(arxiv_id: str) -> str:
     return f"https://arxiv.org/abs/{arxiv_id}"
 
@@ -81,6 +99,7 @@ def valid_id(arxiv_id: str) -> bool:
         r'^[a-z-]+(\.[A-Z]{2})?/\d{7}v\d+$'  # with version
     ]
     return any(re.match(p, arxiv_id) for p in patterns)
+
 
 @st.cache_data(show_spinner=False)
 def fetch_paper_info(arxiv_id: str) -> pd.DataFrame:
@@ -138,6 +157,9 @@ def display_paper(paper, score=0):
     abstract = html.escape(abstract)
     category = html.escape(category)
     authors_text = html.escape(authors_text)
+
+    # TODO: Handle inline math
+    # TODO: Handle latex escape characters
 
     score_html = ""
     if score:
@@ -214,23 +236,7 @@ def main():
         try:
             corpus, corpus_embeddings = load_corpus()
 
-            def fix_arxiv_id(id_value):
-                # Ensure it's a string
-                if not isinstance(id_value, str):
-                    id_value = str(id_value)
-
-                # Old arXiv IDs (like "math.GT/0309136") shouldn’t be split
-                if "." not in id_value or "/" in id_value:
-                    return id_value  
-
-                try:
-                    id_a, id_b = id_value.split(".")
-                    return f"{id_a.zfill(4)}.{id_b}"
-                except ValueError:
-                    # Fallback: just return as-is if something unexpected happens
-                    return id_value
-
-            # FIXME: Handle this elsewhere
+            # FIXME: Ideally handle this elsewhere (like when generating the corpus)
             corpus["id"] = corpus["id"].apply(fix_arxiv_id)
             
         except Exception as e:
@@ -240,15 +246,20 @@ def main():
     # Title
     st.title("arXiv-recommender")
 
-    # Sidebar sample papers
-    # with st.sidebar:
-    #     st.header("Sample Papers")
-    #     for index, paper in corpus.iterrows():
-    #         if index > 5:
-    #             break
-    #         st.markdown(paper["title"])
-    #         st.code(paper["id"])
-    
+    with st.sidebar:
+        st.title("Sample IDs")
+        
+        # Get top 7 largest categories and one paper from each
+        top_categories = corpus['category'].value_counts().head(7).index
+        sample_papers = corpus[corpus['category'].isin(top_categories)].groupby('category').first().reset_index()
+        # Sort by category size (descending)
+        sample_papers = sample_papers.set_index('category').reindex(top_categories).reset_index()
+        
+        # TODO: Present this better
+        for _, paper in sample_papers.iterrows():
+            st.code(paper['id'])
+
+
     # Input
     input_text, get_recommendations = display_input_field()
     if input_text or get_recommendations:
