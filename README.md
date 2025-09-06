@@ -11,10 +11,10 @@ This project is designed to be easily runnable in Google Colab. Each Jupyter not
 
 To get started, simply open and create a copy of any of the notebooks directly in Google Colab using the links below:
 
-* **[0-arxiv-exploration]()**
-* **[1-arxiv-fine-tuning]()**
-* **[2-arxiv-evaluation]()**
-* **[3-arxiv-recommendation]()**
+* **[0-arxiv-exploration](https://colab.research.google.com/github/nadrajak/arxiv-semantic-search/blob/main/notebooks/0-arxiv-exploration.ipynb)**
+* **[1-arxiv-fine-tuning](https://colab.research.google.com/github/nadrajak/arxiv-semantic-search/blob/main/notebooks/1-arxiv-fine-tuning.ipynb)**
+* **[2-arxiv-evaluation](https://colab.research.google.com/github/nadrajak/arxiv-semantic-search/blob/main/notebooks/2-arxiv-evaluation.ipynb)**
+* **[3-arxiv-recommendation](https://colab.research.google.com/github/nadrajak/arxiv-semantic-search/blob/main/notebooks/3-arxiv-recommendation.ipynb)**
 
 
 ## Run locally
