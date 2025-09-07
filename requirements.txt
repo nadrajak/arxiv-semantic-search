@@ -1,0 +1,27 @@
+# Core data science libraries
+numpy
+pandas
+
+# Visualization
+matplotlib
+seaborn
+
+# Machine learning
+scikit-learn
+torch
+sentence-transformers
+
+# Dataset handling
+datasets
+
+# Research paper access
+arxiv
+
+# Text processing
+pylatexenc
+
+# Streamlit app
+streamlit
+
+# Data downloading
+kagglehub
