@@ -19,6 +19,8 @@ from sentence_transformers import SentenceTransformer
 from sentence_transformers.util import semantic_search
 
 import streamlit as st
+
+from pylatexenc.latex2text import LatexNodes2Text
 import html
 
 
@@ -139,6 +141,18 @@ def display_input_field():
     return input_text, get_recommendations
 
 
+def clean_text_for_html(text):
+
+    # Decode latex accents, preserve math delimiters
+    converter = LatexNodes2Text(math_mode="with-delimiters")
+    text = converter.latex_to_text(text)
+    
+    # Escape html
+    text = html.escape(text)
+
+    return text
+
+
 def display_paper(paper, score=0):
     # Extract data from pd.Series
     title = paper["title"]
@@ -152,14 +166,13 @@ def display_paper(paper, score=0):
         authors = paper["authors_parsed"]
         authors_text = ", ".join([a for a in authors])
 
-    # Escape HTML
-    title = html.escape(title)
-    abstract = html.escape(abstract)
-    category = html.escape(category)
-    authors_text = html.escape(authors_text)
 
     # TODO: Handle inline math
-    # TODO: Handle latex escape characters
+    
+    title = clean_text_for_html(title)
+    category = clean_text_for_html(category)
+    authors_text = clean_text_for_html(authors_text)
+    abstract = clean_text_for_html(abstract)
 
     score_html = ""
     if score:
