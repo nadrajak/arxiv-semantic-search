@@ -40,7 +40,6 @@ For local development and execution, follow these steps:
     ```
 From there, you can explore and run the notebooks, or locally host the demo using:
 ```bash
-cd app
-streamlit run demo.py
+streamlit run app/demo.py
 ```
 The application is then available on http://localhost:8501.

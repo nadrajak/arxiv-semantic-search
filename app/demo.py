@@ -29,10 +29,10 @@ import html
 
 DEFAULT_NUM_RECOMMENDATIONS = 5
 
-MODEL_LOCAL_DIR = "models"
+MODEL_LOCAL_DIR = "app/models"
 MODEL_NAME = "nadrajak/allenai-specter-ft2"
 
-CORPUS_LOCAL_DIR = "corpus"
+CORPUS_LOCAL_DIR = "app/corpus"
 CORPUS_NAME = "demo1k"
 
 
@@ -196,7 +196,7 @@ def display_paper(paper, score=0):
         # Title and authors
         # st.markdown(f'<div style="font-weight:600; font-size:1.05rem; margin-bottom:0.25rem;">{title}</div>', unsafe_allow_html=True)
         st.markdown(f'##### **{title}**')  # Streamlit math rendering gets bypassed when the text is injected as html
-        st.markdown(f'<div style="color:#666; font-size:0.9rem; margin-top:-0.5rem; margin-bottom:0.5rem;">{authors_text}</div>', unsafe_allow_html=True)
+        st.markdown(f'<div style="color:#666; font-size:0.9rem; margin-top:-0.75rem; margin-bottom:0.5rem;">{authors_text}</div>', unsafe_allow_html=True)
 
         # Abstract
         with st.expander("Abstract"):
